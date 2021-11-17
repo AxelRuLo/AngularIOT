@@ -1,0 +1,6 @@
+<div class="centrado">
+   <div class="hijo" [ngClass]="{'on': bandera, 'of': !bandera}">
+    <h1 class="texto" [ngClass]="{'on': bandera, 'of': !bandera}">Click para encender o apagar</h1>
+    <mat-slide-toggle class="slide-toggle medio" [formControl]="toogle"></mat-slide-toggle>
+   </div>
+</div>

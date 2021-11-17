@@ -1,0 +1,41 @@
+.centrado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    transition: all;
+    transition-duration: 1s;
+}
+
+.of{
+    background-color: black !important;
+    color: white !important;
+}
+
+.on{
+    background-color: white !important;
+    color: black !important;
+}
+
+.hijo{
+    transition: all;
+    transition-duration: 1s;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+
+.medio{
+    margin-top: 5%;    
+}
+
+.texto{
+    transition: all;
+    transition-duration: 1s;
+    margin-top: 20%;
+}
