@@ -32,9 +32,9 @@ export class MainPageComponent implements OnInit {
         this.socketService.sendMessage("0")
        }
 
-       this.socketService.onNewMessage().subscribe(msg=>{
-         console.log("la bandera ahora es ",msg)
-       })
+      //  this.socketService.onNewMessage().subscribe(msg=>{
+      //    console.log("la bandera ahora es ",msg)
+      //  })
     });
  }
 

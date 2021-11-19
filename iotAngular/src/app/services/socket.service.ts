@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
+import {AngularFireDatabase} from '@angular/fire/database'
 import { Observable } from 'rxjs';
-import { io, Socket } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
 
-  private socket:Socket;
 
 
-  constructor() { 
-    this.socket = io("http://54.152.37.54:3000")
+  constructor( private db:AngularFireDatabase) { 
+
   }
 
-  // EMITTER 
-  sendMessage(msg: string) {
-    this.socket.emit('message', msg );
-  }
+  sendMessage (message: string) {
+    // Get current timestamp
+     const currTime = Number (new Date());
+    // Convert timestamp into readable time string
+     const readableTime = new Date(currTime).toLocaleTimeString();
+    // Convert timestamp into readable date
+     const readableDate = new Date(currTime).toDateString();
+     // Push new message to messages list with time and date data
+     this.db.list( "MyHome/Dispositivo/Luz_1").push({ message, time: readableTime, date: readableDate });
+    // Update messages meta data
+     this.db.object('MyHome/Dispositivo/Luz_1').update( {'last_updated at': currTime})
+   }
 
-  // HANDLER example
-  onNewMessage() {
-    return new Observable(observer => {
-      this.socket.on('message', msg => {
-        observer.next(msg);
-      });
-    });
-  }
+   getRealtimeDbMessages(): Observable<any> {
+    // Return Observable that is fired whenever an item in the messages list path in
+    // the realtime db changes.
+     return this.db.list('MyHome/Dispositivo/Luz_1').valueChanges ();
+   }
 }

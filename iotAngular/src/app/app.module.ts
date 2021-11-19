@@ -10,12 +10,16 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocketService } from './services/socket.service';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     MatSliderModule,
     MatSlideToggleModule,
     BrowserModule,
