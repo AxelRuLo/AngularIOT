@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocketService } from './services/socket.service';
 
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [

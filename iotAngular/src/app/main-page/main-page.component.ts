@@ -16,6 +16,12 @@ export class MainPageComponent implements OnInit {
   bandera = false
 
   constructor(private socketService: SocketService) { 
+    this.socketService.getRealtimeDbMessages().subscribe(msg=>{
+      this.bandera = msg[0]
+      if(this.toogle.value != msg[0]){
+        this.toogle.setValue(msg[0])
+      }
+    })
   }
   
   ngOnInit(){
@@ -24,18 +30,16 @@ export class MainPageComponent implements OnInit {
     this.toogle.valueChanges.subscribe(newToogleValue=> {
        if(newToogleValue){
          console.log("encendido")
-         this.bandera = newToogleValue
-         this.socketService.sendMessage("1")
+        //  this.bandera = newToogleValue
+         this.socketService.sendMessage(1)
        }
        else{
-        this.bandera = newToogleValue
-        this.socketService.sendMessage("0")
+        // this.bandera = newToogleValue
+        this.socketService.sendMessage(0)
        }
-
-      //  this.socketService.onNewMessage().subscribe(msg=>{
-      //    console.log("la bandera ahora es ",msg)
-      //  })
+       
     });
+
  }
 
 

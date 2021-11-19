@@ -13,7 +13,7 @@ export class SocketService {
 
   }
 
-  sendMessage (message: string) {
+  sendMessage (message: Number) {
     // Get current timestamp
      const currTime = Number (new Date());
     // Convert timestamp into readable time string
@@ -21,14 +21,14 @@ export class SocketService {
     // Convert timestamp into readable date
      const readableDate = new Date(currTime).toDateString();
      // Push new message to messages list with time and date data
-     this.db.list( "MyHome/Dispositivo/Luz_1").push({ message, time: readableTime, date: readableDate });
-    // Update messages meta data
-     this.db.object('MyHome/Dispositivo/Luz_1').update( {'last_updated at': currTime})
+     this.db.list( "MyHome/Dispositivo/").set("Luz_1",message)
+    // // Update messages meta data
+    //  this.db.object('MyHome/Dispositivo/Luz_1').update( {'last_updated at': currTime})
    }
 
    getRealtimeDbMessages(): Observable<any> {
     // Return Observable that is fired whenever an item in the messages list path in
     // the realtime db changes.
-     return this.db.list('MyHome/Dispositivo/Luz_1').valueChanges ();
+     return this.db.list('MyHome/Dispositivo').valueChanges ();
    }
 }
